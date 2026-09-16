@@ -1,3 +1,7 @@
+'''
+Simplest test cases for the HTML_Validator.
+'''
+
 import HTML_Validator
 import pytest
 

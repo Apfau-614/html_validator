@@ -1,3 +1,7 @@
+'''
+Test cases for HTML tags that also contain attributes within the tags.
+'''
+
 import HTML_Validator
 
 

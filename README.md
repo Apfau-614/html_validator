@@ -1,9 +1,7 @@
 # HTML Validation with Stacks
 [![](https://github.com/mikeizbicki/html_validator/workflows/tests/badge.svg)](https://github.com/mikeizbicki/html_validator/actions?query=workflow%3Atests)
-[![](https://github.com/mikeizbicki/html_validator/workflows/extra_credit/badge.svg)](https://github.com/mikeizbicki/html_validator/actions?query=workflow%3Atests)
 
 You will implement an extended version of the balanced parentheses algorithm that checks whether html tags are balanced.
-(See [chapter 4.7](https://runestone.academy/runestone/books/published/pythonds/BasicDS/BalancedSymbolsAGeneralCase.html) of the book for details on the balanced parentheses algorithm.)
 
 **Learning Objectives:**
 
@@ -11,6 +9,10 @@ You will implement an extended version of the balanced parentheses algorithm tha
 1. practice using HTML
 1. practice using stacks
 1. practice using pytest and test driven development
+
+**References:**
+
+1. You can find a detailed explanation of how stacks are used to solve the balanced parenthesis algorithm at: <https://runestone.academy/runestone/books/published/pythonds/BasicDS/BalancedSymbolsAGeneralCase.html>
 
 ## Background
 
@@ -58,24 +60,15 @@ You are implementing a limited version of this program.
 
 Complete the following tasks:
 
-1. Fork the [html\_validator repo](https://github.com/mikeizbicki/html_validator) and enable github actions
+1. Fork the repo and enable github actions
 1. Update the `README.md` file so that the test case badges point to your forked repo
-1. Implement the `validate_html` and `_extract_tags` functions so that all test cases in `tests/test_main.py` pass
+1. Implement the `validate_html` and `_extract_tags` functions so that all test cases pass
 
-## Extra Credit: HTML Attributes
+    > **NOTE:**
+    > The `tests/` folder has two files in it.
+    > The part1 test cases are a bit easier than the part2 test cases.
+    > So I recommned you get those working first.
 
-The function of many HTML tags can be modified by specifying attributes within the opening tag.
-For example:
-```
-This is a hyperlink to <a href="https://izbicki.me">my webpage</a>.
-```
-The `a` tag creates a hyperlink, and the `href` attribute specifies where the link goes.
-Notice that the `href` attribute appears only in the opening tag and not in the closing tag.
+1. Push your changes to github
 
-The file `tests/test_ec.py` contains test cases for HTML that includes attributes.
-If your code successfully passes all of these test cases, then you will get 1 point of extra credit on the assignment. 
-You must pass all of the test cases and get the green extra credit badge in order to get this point.
-
-**HINT:**
-You do not need to modify the `validate_html` function at all.
-Instead, just modify the `_extract_tags` function so that it ignores any attributes present in the opening tag.
+1. Submit your repo url to canvas

@@ -26,4 +26,4 @@ jobs:
           flake8 HTML_Validator.py --ignore=E501
       - name: Run tests
         run: |
-          python -m pytest tests/test_main.py
+          python -m pytest
