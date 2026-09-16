@@ -17,7 +17,6 @@ def test__extract_tags_4():
 def test__extract_tags_5():
     assert HTML_Validator._extract_tags('<a><b><c></a></b><f>') == ['<a>','<b>','<c>','</a>','</b>','<f>']
 
-"""
 def test__extract_tags_6():
     with pytest.raises(ValueError, match='found < without matching >'):
         HTML_Validator._extract_tags('<')
@@ -29,7 +28,6 @@ def test__extract_tags_7():
 def test__extract_tags_8():
     with pytest.raises(ValueError, match='found < without matching >'):
         HTML_Validator._extract_tags('this is a <strong< test')
-"""
 
 def test__extract_tags_9():
     n = 10000
