@@ -3,6 +3,8 @@
 
 You will implement an extended version of the balanced parentheses algorithm that checks whether html tags are balanced.
 
+<img src=img/foxtrot.png width=100% />
+
 **Learning Objectives:**
 
 1. implement the balanced parenthesis algorithm
