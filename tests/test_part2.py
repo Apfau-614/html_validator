@@ -11,6 +11,12 @@ HINT:
 All the test cases in this file or for the validate_html function.
 But the easiest way to get them to pass is to modify the extract_tags function.
 My solution didn't have to modify validate_html at all.
+I strongly encourage you to add some doctests to the _extract_tags function
+that are related to attributes and get those doctests to pass.
+If you created good doctests, then the more complicated "integration tests"
+in this file will pass "automatically".
+Working on simpler doctests for _extract_tags will be much easier
+than working on the more complicated tests in this file.
 '''
 
 import HTML_Validator
