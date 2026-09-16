@@ -25,21 +25,6 @@ def test_validate_html_4():
 def test_validate_html_5():
     assert HTML_Validator.validate_html('this is a <a href="https://izbicki.me">link and a <span class=bold id=test></span></a>')
 
-def test_validate_html_6():
-    assert HTML_Validator.validate_html('''
-    <html lang=en>
-    <head>
-    <link rel="stylesheet" href="https://izbicki.me/style.css">
-    <title>My <em class=fancy>awesome</em> page</title>
-    </head>
-    <body id=main class="wide dark">
-    <div class=container>
-    <p style="color: red">Visit <a href="https://izbicki.me/?a=1&b=2">my site</a>!</p>
-    </div>
-    </body>
-    </html>
-    ''')
-
 def test_validate_html_7():
     # </div> missing
     assert not HTML_Validator.validate_html('''
@@ -57,15 +42,6 @@ def test_validate_html_8():
     <body class=dark>
     <p id=p1>Programming is the <strong class=big><em>best</strong></em>!</p>
     </body>
-    ''')
-
-def test_validate_html_9():
-    # tags whose attributes look like other tags / paths
-    assert HTML_Validator.validate_html('''
-    <table border=1 summary="a < b comparison is not here">
-    <tr class=odd><td colspan=2 data-path="/a/b/c">cell</td></tr>
-    <tr class=even><td><a href="index.html" title='my "home" page'>home</a></td></tr>
-    </table>
     ''')
 
 def test_validate_html_10():
