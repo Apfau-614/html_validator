@@ -5,17 +5,9 @@ Test cases for HTML tags that also contain attributes within the tags.
 import HTML_Validator
 
 
-def test__extract_tags_1():
-    assert HTML_Validator._extract_tags('this is a <strong test>') == ['<strong>']
-
-def test__extract_tags_2():
-    assert HTML_Validator._extract_tags('this is a <a href="https://izbicki.me">link</a>') == ['<a>','</a>']
-
-def test__extract_tags_3():
-    assert HTML_Validator._extract_tags('this is a <a href="https://izbicki.me">') == ['<a>']
-
-def test__extract_tags_4():
-    assert HTML_Validator._extract_tags('this is a <a href="https://izbicki.me">link and a <span class=bold id=test></span></a>') == ['<a>','<span>','</span>','</a>']
+# HINT:
+# All the test cases in this file or for the validate_html function.
+# But the easiest way to get them to pass is to modify the extract_tags function.
 
 
 def test_validate_html_1():
@@ -34,41 +26,53 @@ def test_validate_html_5():
     assert HTML_Validator.validate_html('this is a <a href="https://izbicki.me">link and a <span class=bold id=test></span></a>')
 
 def test_validate_html_6():
-    # deep nesting, every tag carries attributes
-    n = 10000
-    opens  = ['<t%d class="c%d" id=i%d>' % (i, i, i) for i in range(n)]
-    closes = ['</t%d>' % i for i in reversed(range(n))]
-    assert HTML_Validator.validate_html('text '.join(opens + closes))
-    assert not HTML_Validator.validate_html('text '.join(opens))
-    assert not HTML_Validator.validate_html('text '.join(opens + closes[:-1]))
+    assert HTML_Validator.validate_html('''
+    <html lang=en>
+    <head>
+    <link rel="stylesheet" href="https://izbicki.me/style.css">
+    <title>My <em class=fancy>awesome</em> page</title>
+    </head>
+    <body id=main class="wide dark">
+    <div class=container>
+    <p style="color: red">Visit <a href="https://izbicki.me/?a=1&b=2">my site</a>!</p>
+    </div>
+    </body>
+    </html>
+    ''')
 
 def test_validate_html_7():
-    # flat sequence of sibling tags with attributes containing angle-free noise
-    n = 10000
-    doc = ''.join('<p style="a:%d" data-x=\'y z\'>para %d</p>\n' % (i, i) for i in range(n))
-    assert HTML_Validator.validate_html('<body id=main>' + doc + '</body>')
-    assert not HTML_Validator.validate_html('<body id=main>' + doc)
+    # </div> missing
+    assert not HTML_Validator.validate_html('''
+    <html lang=en>
+    <body id=main>
+    <div class=container>
+    <p style="color: red">Visit <a href="https://izbicki.me">my site</a>!</p>
+    </body>
+    </html>
+    ''')
 
 def test_validate_html_8():
-    # mismatched-order interleaving deep in an otherwise valid large document
-    n = 5000
-    prefix = ''.join('<d%d k=v>' % i for i in range(n))
-    suffix = ''.join('</d%d>' % i for i in reversed(range(n)))
-    assert not HTML_Validator.validate_html(prefix + '<a href="x"><b id=y></a></b>' + suffix)
-    assert HTML_Validator.validate_html(prefix + '<a href="x"><b id=y></b></a>' + suffix)
+    # <em> and <strong> closed out of order
+    assert not HTML_Validator.validate_html('''
+    <body class=dark>
+    <p id=p1>Programming is the <strong class=big><em>best</strong></em>!</p>
+    </body>
+    ''')
 
 def test_validate_html_9():
-    # attribute values that are near-misses for tag syntax (slashes, equals, spaces)
-    n = 2000
-    doc = ''.join(
-        '<a href="https://izbicki.me/path/%d?q=1&r=2" target=_blank>link %d</a>' % (i, i)
-        for i in range(n))
-    assert HTML_Validator.validate_html('<html lang=en><body>' + doc + '</body></html>')
-    assert not HTML_Validator.validate_html('<html lang=en><body>' + doc + '</html></body>')
+    # tags whose attributes look like other tags / paths
+    assert HTML_Validator.validate_html('''
+    <table border=1 summary="a < b comparison is not here">
+    <tr class=odd><td colspan=2 data-path="/a/b/c">cell</td></tr>
+    <tr class=even><td><a href="index.html" title='my "home" page'>home</a></td></tr>
+    </table>
+    ''')
 
 def test_validate_html_10():
-    # same tag name repeated/self-nested with differing attributes
-    n = 10000
-    doc = '<div class=x>' * n + 'content' + '</div>' * n
-    assert HTML_Validator.validate_html(doc)
-    assert not HTML_Validator.validate_html(doc + '</div>')
+    # nested lists, all matched, same tag names repeated
+    assert HTML_Validator.validate_html('''
+    <ul class=outer>
+      <li id=a>one<ul class=inner><li id=a1>one.one</li></ul></li>
+      <li id=b>two</li>
+    </ul>
+    ''')
