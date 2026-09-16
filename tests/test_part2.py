@@ -1,13 +1,19 @@
 '''
 Test cases for HTML tags that also contain attributes within the tags.
+
+NOTE:
+It is customary to write test cases in a sequence of "simplest to most complicated",
+which allows us to develop our code starting with the simplest features first.
+The HTML in this file is more complicated than the HTML in part1,
+and that's why it is in its own separate file labeled part2.
+
+HINT:
+All the test cases in this file or for the validate_html function.
+But the easiest way to get them to pass is to modify the extract_tags function.
+My solution didn't have to modify validate_html at all.
 '''
 
 import HTML_Validator
-
-
-# HINT:
-# All the test cases in this file or for the validate_html function.
-# But the easiest way to get them to pass is to modify the extract_tags function.
 
 
 def test_validate_html_1():
