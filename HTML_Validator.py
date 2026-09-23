@@ -1,5 +1,4 @@
 #!/bin/python3
-import re
 
 
 def validate_html(html):
@@ -34,9 +33,6 @@ def validate_html(html):
 
     return len(stack) == 0
 
-
-
-
     # HINT:
     # use the _extract_tags function below to generate a list of html tags without any extra text;
     # then process these html tags using the balanced parentheses algorithm from the stack.py file.
@@ -55,6 +51,8 @@ def _extract_tags(html):
     >>> _extract_tags('Python <strong>rocks</strong>!')
     ['<strong>', '</strong>']
     '''
+
+
     tags = []
     i = 0
     n = len(html)
