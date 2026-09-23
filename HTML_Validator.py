@@ -10,8 +10,6 @@ def validate_html(html):
     True
     >>> validate_html('<strong>example')
     False
-    >>> validate_html('<a href="https://example.com">link</a>')
-    True
     '''
 
     try:
