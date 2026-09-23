@@ -52,7 +52,6 @@ def _extract_tags(html):
     ['<strong>', '</strong>']
     '''
 
-
     tags = []
     i = 0
     n = len(html)
