@@ -25,7 +25,7 @@ def validate_html(html):
         if not tag.startswith('</'):
             name = tag[1:-1].split()[0]
             stack.append(name)
-        else
+        else:
             if len(stack) == 0:
                 return False
             name = tag[2:-1].split()[0]
