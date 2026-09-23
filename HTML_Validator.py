@@ -12,7 +12,11 @@ def validate_html(html):
     False
     '''
 
-    tags = _extract_tags(html)
+    try:
+        tags = _extract_tags(html)
+    except ValueError:
+        return False
+
     stack = []
 
     for tag in tags:
@@ -50,4 +54,21 @@ def _extract_tags(html):
     ['<strong>', '</strong>']
     '''
 
-    return re.findall(r'<[^>]+>', html)
+    tags = []
+    i = 0
+    n = len(html)
+
+    while i < n:
+        if html[i] == '<':
+            close_idx = html.find('>', i + 1)
+            if close_idx == -1:
+                raise ValueError('found < without matching >')
+            inner = html[i + 1:close_idx]
+            if '<' in inner:
+                raise ValueError('found < without matching >')
+            tags.append(html[i:close_idx + 1])
+            i = close_idx + 1
+        else:
+            i += 1
+
+    return tags
