@@ -10,6 +10,8 @@ def validate_html(html):
     True
     >>> validate_html('<strong>example')
     False
+    >>> validate_html('<a href="https://example.com">link</a>')
+    True
     '''
 
     try:
@@ -21,11 +23,13 @@ def validate_html(html):
 
     for tag in tags:
         if not tag.startswith('</'):
-            stack.append(tag)
-        elif tag.startswith('</'):
+            name = tag[1:-1].split()[0]
+            stack.append(name)
+        else
             if len(stack) == 0:
                 return False
-            if stack[-1][1:-1] == tag[2:-1]:
+            name = tag[2:-1].split()[0]
+            if stack[-1] == name:
                 stack.pop()
             else:
                 return False
@@ -53,7 +57,6 @@ def _extract_tags(html):
     >>> _extract_tags('Python <strong>rocks</strong>!')
     ['<strong>', '</strong>']
     '''
-
     tags = []
     i = 0
     n = len(html)
